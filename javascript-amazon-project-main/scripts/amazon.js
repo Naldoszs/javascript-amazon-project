@@ -186,7 +186,9 @@ products.forEach((product) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">Add to Cart</button>
+          <button class="js-add-to-cart-button add-to-cart-button button-primary" data-product-id = "${
+            product.id
+          }">Add to Cart</button>
         </div>`;
   //creation of html end
   productsHTML += html;
@@ -196,3 +198,60 @@ console.log(productsHTML);
 // placing the productsHTML on the webpage
 const productsGridDisplay = document.querySelector(".js-products-grid");
 productsGridDisplay.innerHTML = productsHTML;
+
+//getting the  js-add-to-cart btn
+const addToCartBtn = document.querySelectorAll(".js-add-to-cart-button");
+
+//start of addToCartbtn.forEach()
+//loop through all js-add-to-cart btns
+addToCartBtn.forEach((btn) => {
+  //start of btn.addEventListner function
+  //add event listner to all add-to-cart-btns
+  btn.addEventListener("click", () => {
+    //getting the data- attributes attached to the individual btn
+    //gives a DOMStringMap which is object-like
+    //then getting the data-product-name attribute using camel case (productName) from initial kebab case (data-product-name)
+    const productId = btn.dataset.productId;
+
+    //push in cart array as an object
+    // & also checking if we already hve a matching productName in the cart so the quantity always increase by 1 bfr pushing in the cart
+    //start of object
+    let matchingItem;
+    cart.forEach((item) => {
+      //note that item stands for individual object to be pushed in the cart array
+      if (item.productId === productId) {
+        matchingItem = item;
+      }
+    });
+    // if there is a matching object which have same productName;
+    if (matchingItem) {
+      matchingItem.quantity += 1;
+    } else {
+      //else if there is no matching object with same product name in the cart array
+      cart.push({
+        productId, //productId: productId,
+        quantity: 1,
+      });
+    }
+    //end of object
+
+    // displaying the cart quantity in the cart icon at the top right of the page
+    let cartQuantity = 0;
+    cart.forEach((item) => {
+      cartQuantity += item.quantity;
+    });
+
+    //display the cart quantity on the page using DOM
+    const cartQuantityDisplay = document.querySelector(".js-cart-quantity");
+
+    cartQuantityDisplay.innerHTML = `${cartQuantity}`;
+
+    console.log(cart);
+    console.log(cartQuantity);
+  });
+  //end of btn.addEventListner function
+});
+//start of addToCartbtn.forEach()
+
+//function for add to cart btn
+function addToCart() {}
