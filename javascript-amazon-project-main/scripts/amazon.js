@@ -1,5 +1,6 @@
-// arrays of product objects
-const products = [
+// arrays of product objects - collpased and using products.js' products array instead
+/* const products = [
+  //1st start
   {
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
     name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
@@ -9,6 +10,8 @@ const products = [
     },
     priceCents: 1290,
   },
+  //1st end
+  //2nd start
   {
     image: "images/products/intermediate-composite-basketball.jpg",
     name: "Intermediate Size Basketball",
@@ -18,6 +21,8 @@ const products = [
     },
     priceCents: 2095,
   },
+  //2nd end
+  //3rd start
   {
     image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
     name: "Adults Plain Cotton T-Shirt - 2 Pack",
@@ -27,7 +32,107 @@ const products = [
     },
     priceCents: 795,
   },
-];
+  //3rd end
+  //4th start
+  {
+    image: "images/products/black-2-slot-toaster.jpg",
+    name: "2 Slot Toaster - Black",
+    rating: {
+      stars: 5.0,
+      count: 2190,
+    },
+    priceCents: 1795,
+  },
+  //4th end
+  //5th start
+  {
+    image: "images/products/6-piece-white-dinner-plate-set.jpg",
+    name: "6 Piece White Dinner Plate",
+    rating: {
+      stars: 4.0,
+      count: 37,
+    },
+    priceCents: 2166,
+  },
+  //5th end
+  //6th start
+  {
+    image: "images/products/6-piece-non-stick-baking-set.webp",
+    name: "6-Piece Nonstick, Carbon Steel Oven Bakeware Baking Set",
+    rating: {
+      stars: 4.5,
+      count: 179,
+    },
+    priceCents: 3496,
+  },
+  //6th end
+  //7th start
+  {
+    image: "images/products/plain-hooded-fleece-sweatshirt-yellow.jpg",
+    name: "Plain Hooded Fleece Sweatshirt",
+    rating: {
+      stars: 4.5,
+      count: 318,
+    },
+    priceCents: 2500,
+  },
+  //7th end
+  //8th start
+  {
+    image: "images/products/liquid-laundry-detergent-plain.jpg",
+    name: "Liquid Laundry Detergent, 110 Loads, 82.5 Fl Oz",
+    rating: {
+      stars: 4.5,
+      count: 306,
+    },
+    priceCents: 2988,
+  },
+  //8th end
+  //9th start
+  {
+    image: "images/products/luxury-tower-set-6-piece.jpg",
+    name: "Luxury Towel Set - Graphite Gray",
+    rating: {
+      stars: 4.5,
+      count: 166,
+    },
+    priceCents: 3705,
+  },
+  //9th end
+  //10th start
+  {
+    image: "images/products/women-chiffon-beachwear-coverup-black.jpg",
+    name: "Women's Chiffon Beachwear Cover Up - Black",
+    rating: {
+      stars: 4.5,
+      count: 235,
+    },
+    priceCents: 1905,
+  },
+  //10th end
+  //11th start
+  {
+    image: "images/products/knit-athletic-sneakers-gray.jpg",
+    name: "Waterproof Knit Athletic Sneakers - Gray",
+    rating: {
+      stars: 4.0,
+      count: 3509,
+    },
+    priceCents: 1905,
+  },
+  //11th end
+  //12th start
+  {
+    image: "images/products/knit-athletic-sneakers-gray.jpg",
+    name: "Waterproof Knit Athletic Sneakers - Gray",
+    rating: {
+      stars: 4.0,
+      count: 3509,
+    },
+    priceCents: 1905,
+  },
+  //12th end
+]; */
 
 let productsHTML = "";
 //looping through the products
