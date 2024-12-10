@@ -134,6 +134,11 @@
   //12th end
 ]; */
 
+// IMPORT CART VARIABLE
+import { products } from "../data/products.js";
+import { cart } from "../data/cart.js";
+// import { cart as mycart } from "../data/cart.js";
+
 let productsHTML = "";
 //looping through the products
 products.forEach((product) => {
