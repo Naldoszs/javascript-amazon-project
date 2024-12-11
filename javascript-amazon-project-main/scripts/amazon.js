@@ -144,6 +144,8 @@ import { cart, addToCartList } from "../data/cart.js";
 cartObject.cart;
 cartObject.addToCartList();
  */
+// IMPORT PRICECENT  VARIABLE
+import { formatCurrency } from "./utils/money.js";
 
 let productsHTML = "";
 // LOOPING THROUGH THE PRODUCTS
@@ -171,8 +173,8 @@ products.forEach((product) => {
             }</div>
           </div>
 
-          <div class="product-price">$${(product.priceCents / 100).toFixed(
-            2
+          <div class="product-price">$${formatCurrency(
+            product.priceCents
           )}</div>
 
           <div class="product-quantity-container">

@@ -1,5 +1,5 @@
 //create carts
-export const cart = [
+export let cart = [
   // FIRST ITEM
   {
     productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -50,4 +50,9 @@ export function addToCartList(productId) {
       quantity: 1,
     });
   }
+}
+
+//FUNCTION TO PUSH UNDELETED CART ARRAYS TO NEW CART
+export function pushToNewCart(productId) {
+  cart = cart.filter((cartItem) => cartItem.productId !== productId);
 }
