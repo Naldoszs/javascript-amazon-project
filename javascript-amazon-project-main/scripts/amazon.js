@@ -207,7 +207,6 @@ products.forEach((product) => {
   productsHTML += html;
 });
 
-console.log(productsHTML);
 // PLACING THE PRODUCTSHTML ON THE WEBPAGE
 const productsGridDisplay = document.querySelector(".js-products-grid");
 productsGridDisplay.innerHTML = productsHTML;
@@ -251,12 +250,8 @@ addToCartBtn.forEach((btn) => {
     displayCartQuantity();
 
     // LOG IN THE CONSOLE
-    console.log(cart);
-    console.log(cartQuantity);
+    /*     console.log(cart);
+    console.log(cartQuantity); */
   });
   // END OF BTN.ADDEVENTLISTNER FUNCTION
 });
-// START OF ADDTOCARTBTN.FOREACH()
-
-// FUNCTION FOR ADD TO CART BTN
-// FUNCTION ADDTOCART() {}

@@ -1,9 +1,21 @@
 // IMPORT CART ARRAY VARIABLE
-import { cart, pushToNewCart } from "../data/cart.js";
+import {
+  cart,
+  pushToNewCart,
+  saveCartItemsToLocalStorage,
+} from "../data/cart.js";
 // IMPORT PRODUCT ARRAY VARIABLE
 import { products } from "../data/products.js";
 // IMPORT PRICECENT VARIABLE
 import { formatCurrency } from "./utils/money.js";
+
+import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
+
+import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
+
+import { deliveryOptions } from "../data/deliveryOptions.js";
+
+//INTERNAL
 
 // INVOKE THE FUNCTION TO RENDER THE CART ON PAGE LOAD
 renderCartItems();
@@ -20,11 +32,23 @@ function renderCartItems() {
       (product) => product.id === productId
     );
 
+    //GET FULL DELIVERY OPTION IN CART
+    const deliveryOptionId = cartItem.deliveryOptionsId;
+
+    const matchingDeliveryOption = deliveryOptions.find(
+      (option) => option.id === deliveryOptionId
+    );
+
+    //GENERATE VARIABLE FOR DATE
+    const today = dayjs();
+    const deliveryDate = today.add(matchingDeliveryOption.deliveryDays, "days");
+    const dateString = deliveryDate.format("dddd, MMMM D");
+
     // Generate the HTML if a matching product exists
     if (matchingProduct) {
       cartSummaryHTML += `
         <div class="cart-item-container">
-          <div class="delivery-date">Delivery date: Tuesday, June 21</div>
+          <div class="delivery-date">Delivery date: ${dateString}</div>
 
           <div class="cart-item-details-grid">
             <img
@@ -54,47 +78,18 @@ function renderCartItems() {
               </div>
             </div>
 
-            <div class="delivery-options">
+            <div class="js-delivery-options delivery-options">
               <div class="delivery-options-title">
                 Choose a delivery option:
               </div>
-              <div class="delivery-option">
-                <input
-                  type="radio"
-                  checked
-                  class="delivery-option-input"
-                  name="delivery-option-${matchingProduct.id}"
-                />
-                <div>
-                  <div class="delivery-option-date">Tuesday, June 21</div>
-                  <div class="delivery-option-price">FREE Shipping</div>
-                </div>
-              </div>
-              <div class="delivery-option">
-                <input
-                  type="radio"
-                  class="delivery-option-input"
-                  name="delivery-option-${matchingProduct.id}"
-                />
-                <div>
-                  <div class="delivery-option-date">Wednesday, June 15</div>
-                  <div class="delivery-option-price">$4.99 - Shipping</div>
-                </div>
-              </div>
-              <div class="delivery-option">
-                <input
-                  type="radio"
-                  class="delivery-option-input"
-                  name="delivery-option-${matchingProduct.id}"
-                />
-                <div>
-                  <div class="delivery-option-date">Monday, June 13</div>
-                  <div class="delivery-option-price">$9.99 - Shipping</div>
-                </div>
-              </div>
+             ${deliveryOptionsHTML(matchingProduct, cartItem)}
+
             </div>
           </div>
         </div>`;
+    } else {
+      console.error(`Product with ID ${productId} not found.`);
+      return;
     }
   });
 
@@ -114,6 +109,9 @@ function deleteCartItem(evt) {
   // Update the cart
   pushToNewCart(productId);
 
+  // SAVE TO LOCAL STORAGE
+  saveCartItemsToLocalStorage(cart);
+
   // Re-render the cart
   renderCartItems();
 }
@@ -127,3 +125,56 @@ function attachDeleteListeners() {
     deleteLink.addEventListener("click", deleteCartItem);
   });
 }
+
+// FTN TO GENERATE DELIVERYOPTIONS HTML
+function deliveryOptionsHTML(matchingProduct, cartItem) {
+  let htmlGenerated = "";
+
+  deliveryOptions.forEach((deliveryOption) => {
+    //GENERATE VARIABLE FOR DATE
+    const today = dayjs();
+    const deliveryDate = today.add(deliveryOption.deliveryDays, "days");
+    const dateString = deliveryDate.format("dddd, MMMM D");
+    // GENERATE VARIABLE FOR PRICE
+    const priceString =
+      deliveryOption.priceCents === 0
+        ? "FREE"
+        : `$${formatCurrency(deliveryOption.priceCents)} -`;
+
+    //GENERATING THE ISCHECKED VARIABLE
+    const isChecked = deliveryOption.id === cartItem.deliveryOptionsId;
+
+    htmlGenerated += `<div class="delivery-option">
+        <input
+        ${isChecked ? "checked" : ""}
+          type="radio"
+          class="delivery-option-input"
+          name="delivery-option-${matchingProduct.id}"
+        />
+        <div>
+          <div class="delivery-option-date">${dateString}</div>
+          <div class="delivery-option-price">${priceString} Shipping</div>
+        </div>
+    </div>`;
+  });
+
+  return htmlGenerated;
+}
+
+//
+//
+//
+
+//EXTERNAL
+
+// EXTERNAL LIBRARIES FNTNS
+hello();
+
+const date = dayjs(); //GIVES TODAY'S DATE
+const deliveryDate = date.add(1, "days"); //GIVES TODAY'S DATE + 7 DAYS IN TIME
+const formattedDate = deliveryDate.format("dddd, MMMM D"); // GIVES IN THE FORMAT YOU WANT
+
+console.log(formattedDate);
+
+// TESTING
+// console.log(deliveryOptionsHTML(matchingProduct));
