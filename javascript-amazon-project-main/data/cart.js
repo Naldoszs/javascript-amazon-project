@@ -79,3 +79,15 @@ export function saveCartItemsToLocalStorage() {
     console.error("Failed to save to localStorage:", error);
   }
 } */
+
+// FUNCTION TO UPDATE DELIVERY OPTION IN THE CART
+export function updateDeliveryOption(deliveryOptionsId, productId) {
+  // Use find to search for a matching item
+  const matchingItem = cart.find(
+    (cartItem) => cartItem.productId === productId
+  );
+
+  matchingItem.deliveryOptionsId = deliveryOptionsId;
+
+  saveCartItemsToLocalStorage();
+}
