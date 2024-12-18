@@ -10,11 +10,13 @@ import { products, getMatchingProducts } from "../../data/products.js";
 // IMPORT PRICECENT VARIABLE
 import { formatCurrency } from "../utils/money.js";
 
-import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
+// import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
 
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 import { deliveryOptions } from "../../data/deliveryOptions.js";
+
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 export function renderCartItems() {
   let cartSummaryHTML = "";
@@ -109,6 +111,9 @@ function deleteCartItem(evt) {
 
   // Re-render the cart
   renderCartItems();
+
+  //RE-RENDER THE ORDER SUMMARY
+  renderPaymentSummary();
 }
 
 // FUNCTION TO ATTACH DELETE LISTENERS
@@ -136,6 +141,9 @@ function attachDeliveryOptionListeners() {
       updateDeliveryOption(deliveryOptionId, productId);
       //RE-RENDERING THE PAGE
       renderCartItems();
+
+      // RE-RENDERING THE PAYMENT SUMMARY
+      renderPaymentSummary();
     });
   });
 }
@@ -188,9 +196,9 @@ export function getDeliveryOptions(deliveryOptionId) {
 }
 
 // EXTERNAL LIBRARIES FNTNS
-hello();
+/* hello();
 
 const date = dayjs();
 const deliveryDate = date.add(1, "days");
 const formattedDate = deliveryDate.format("dddd, MMMM D");
-console.log(formattedDate);
+console.log(formattedDate); */
