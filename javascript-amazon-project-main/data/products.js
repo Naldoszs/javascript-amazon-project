@@ -470,3 +470,12 @@ export const products = [
     keywords: ["sweaters", "hoodies", "apparel", "mens"],
   },
 ];
+
+//FUNCTION TO GET MATCHING PRODUCT
+
+export function getMatchingProducts(productId) {
+  //FIND MATCHING PRODUCT
+  const matchingProduct = products.find((product) => product.id === productId);
+
+  return matchingProduct;
+}

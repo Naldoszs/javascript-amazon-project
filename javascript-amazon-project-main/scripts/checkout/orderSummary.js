@@ -6,7 +6,7 @@ import {
   updateDeliveryOption,
 } from "../../data/cart.js";
 // IMPORT PRODUCT ARRAY VARIABLE
-import { products } from "../../data/products.js";
+import { products, getMatchingProducts } from "../../data/products.js";
 // IMPORT PRICECENT VARIABLE
 import { formatCurrency } from "../utils/money.js";
 
@@ -23,15 +23,13 @@ export function renderCartItems() {
   cart.forEach((cartItem) => {
     const productId = cartItem.productId;
 
-    // Find the matching product
-    const matchingProduct = products.find(
-      (product) => product.id === productId
-    );
+    // Find the matching product // INVOKE FTN TO GET MATCHING PRODUCT
+    const matchingProduct = getMatchingProducts(productId);
 
-    // GET FULL DELIVERY OPTION IN CART
-    const deliveryOptionId = cartItem.deliveryOptionsId;
-    const matchingDeliveryOption = deliveryOptions.find(
-      (option) => option.id === deliveryOptionId
+    // GET FULL DELIVERY OPTION IN CART // ftn to get it below
+
+    const matchingDeliveryOption = getDeliveryOptions(
+      cartItem.deliveryOptionsId
     );
 
     if (!matchingProduct || !matchingDeliveryOption) {
@@ -177,6 +175,16 @@ function deliveryOptionsHTML(matchingProduct, cartItem) {
         </div>`;
     })
     .join("");
+}
+
+// FUNCTION TO GET FULL DELIVERY OPTION
+
+export function getDeliveryOptions(deliveryOptionId) {
+  const matchingDeliveryOption = deliveryOptions.find(
+    (option) => option.id === deliveryOptionId
+  );
+
+  return matchingDeliveryOption || matchingDeliveryOption[0];
 }
 
 // EXTERNAL LIBRARIES FNTNS
