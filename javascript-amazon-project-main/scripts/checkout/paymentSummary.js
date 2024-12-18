@@ -4,7 +4,7 @@ import { products, getMatchingProducts } from "../../data/products.js";
 
 import { getDeliveryOptions } from "./orderSummary.js";
 
-import { formatCurrency } from "../utils/money.js";
+import formatCurrency from "../utils/money.js";
 
 export function renderPaymentSummary() {
   let productPriceCents = 0;

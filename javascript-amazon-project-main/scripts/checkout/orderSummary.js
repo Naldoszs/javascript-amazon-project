@@ -8,7 +8,7 @@ import {
 // IMPORT PRODUCT ARRAY VARIABLE
 import { products, getMatchingProducts } from "../../data/products.js";
 // IMPORT PRICECENT VARIABLE
-import { formatCurrency } from "../utils/money.js";
+import formatCurrency from "../utils/money.js";
 
 // import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
 
