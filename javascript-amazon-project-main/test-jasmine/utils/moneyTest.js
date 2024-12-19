@@ -1,4 +1,4 @@
-import formatCurrency from "../scripts/utils/money.js";
+import formatCurrency from "../../scripts/utils/money.js";
 
 // CREATE  TEST SUITE  FUNCTION IN JASMINE
 
