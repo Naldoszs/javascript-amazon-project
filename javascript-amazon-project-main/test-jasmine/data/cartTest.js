@@ -1,5 +1,6 @@
 import { addToCartList, cart, loadFromStorage } from "../../data/cart.js";
 
+// RUN UNIT TEST - that is, 'ONE PIECE OF CODE'
 describe("TEST SUITE: cart function", function () {
   // RUNNING TEST COVERAGE (that., multiple if-statements tests)
   // TEST FOR IF STATEMENT IN THE addToCartList function

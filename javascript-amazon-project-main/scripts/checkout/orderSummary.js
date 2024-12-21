@@ -18,6 +18,7 @@ import { deliveryOptions } from "../../data/deliveryOptions.js";
 
 import { renderPaymentSummary } from "./paymentSummary.js";
 
+//FUNCTION TO RENDER THE CART ITEMS
 export function renderCartItems() {
   let cartSummaryHTML = "";
 
@@ -48,7 +49,9 @@ export function renderCartItems() {
 
     // Generate the HTML
     cartSummaryHTML += `
-      <div class="cart-item-container">
+      <div class="jasmine-cart-item-container-${
+        matchingProduct.id
+      } jasmine-cart-item-container cart-item-container">
         <div class="delivery-date">Delivery date: ${dateString}</div>
 
         <div class="cart-item-details-grid">
@@ -64,16 +67,18 @@ export function renderCartItems() {
             <div class="product-price">$${formatCurrency(
               matchingProduct.priceCents
             )}</div>
-            <div class="product-quantity">
+            <div class="jasmine-product-quantity-${
+              matchingProduct.id
+            } product-quantity">
               <span> Quantity: <span class="quantity-label">${
                 cartItem.quantity
               }</span> </span>
               <span class="update-quantity-link link-primary">
                 Update
               </span>
-              <span class="js-delete-quantity-link delete-quantity-link link-primary" data-product-id="${
+              <span class="js-delete-quantity-link delete-quantity-link link-primary jasmine-delete-quantity-link-${
                 matchingProduct.id
-              }">
+              }" data-product-id="${matchingProduct.id}">
                 Delete
               </span>
             </div>
