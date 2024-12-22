@@ -40,11 +40,11 @@ export function renderPaymentSummary() {
   // CALCULATE ORDER TOTAL
   orderTotalPriceCents = totalTaxPriceCents + estimatedTaxPriceCents;
 
-  console.log(productPriceCents);
+  /*   console.log(productPriceCents);
   console.log(shippingPriceCents);
   console.log(totalTaxPriceCents);
   console.log(estimatedTaxPriceCents);
-  console.log(orderTotalPriceCents);
+  console.log(orderTotalPriceCents); */
 
   const paymentSummaryHTML = ` <div class="payment-summary">
           <div class="payment-summary-title">Order Summary</div>

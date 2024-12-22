@@ -145,7 +145,7 @@ cartObject.cart;
 cartObject.addToCartList();
  */
 // IMPORT PRICECENT  VARIABLE
-import { formatCurrency } from "./utils/money.js";
+import formatCurrency from "./utils/money.js";
 
 let productsHTML = "";
 // LOOPING THROUGH THE PRODUCTS
