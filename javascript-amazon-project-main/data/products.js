@@ -25,7 +25,25 @@ class Product {
   getPrice() {
     return `$${formatCurrency(this.priceCents)}`;
   }
+
+  extraInfoHTML() {
+    return "";
+  }
   //class end
+}
+
+// create a specific clothing class
+class Clothing extends Product {
+  sizeChartLink;
+  constructor(productDetails) {
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  extraInfoHTML() {
+    // super.extraInfoHTML();
+    return `<a href="${this.sizeChartLink}" target="_blank">Size Chart Info</a>`;
+  }
 }
 
 //convert regular objects of product/productDetail into class
@@ -501,7 +519,11 @@ export const products = [
     keywords: ["sweaters", "hoodies", "apparel", "mens"],
   },
 ].map((productDetails) => {
-  return new Product(productDetails);
+  if (productDetails.type === "clothing") {
+    return new Clothing(productDetails);
+  } else {
+    return new Product(productDetails);
+  }
 });
 
 /* // practicing start
@@ -545,3 +567,5 @@ export function getMatchingProducts(productId) {
 
   return matchingProduct;
 }
+
+// learn about polymorphism in JS classes.
