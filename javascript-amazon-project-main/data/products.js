@@ -1,3 +1,34 @@
+import formatCurrency from "../scripts/utils/money.js";
+
+// declaring & assigning a class
+class Product {
+  //class start
+  //declaring the properties to start as undefined
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+
+  constructor(productDetails) {
+    this.id = productDetails.id;
+    this.image = productDetails.image;
+    this.name = productDetails.name;
+    this.rating = productDetails.rating;
+    this.priceCents = productDetails.priceCents;
+  }
+
+  getStarsUrl() {
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
+  }
+
+  getPrice() {
+    return `$${formatCurrency(this.priceCents)}`;
+  }
+  //class end
+}
+
+//convert regular objects of product/productDetail into class
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -469,10 +500,45 @@ export const products = [
     priceCents: 2400,
     keywords: ["sweaters", "hoodies", "apparel", "mens"],
   },
-];
+].map((productDetails) => {
+  return new Product(productDetails);
+});
+
+/* // practicing start
+class Product {
+  //class start
+  //declaring the properties to start as undefined
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+
+  constructor(productDetails) {
+    this.id = productDetails.id;
+    this.image = productDetails.image;
+    this.name = productDetails.name;
+    this.rating = productDetails.rating;
+    this.priceCents = productDetails.priceCents;
+  }
+  //class end
+}
+//instantiate the class
+const products1 = new Product({
+  id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+  image: "images/products/athletic-cotton-socks-6-pairs.jpg",
+  name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
+  rating: {
+    stars: 4.5,
+    count: 87,
+  },
+  priceCents: 1090,
+  keywords: ["socks", "sports", "apparel"],
+});
+console.log(products1);
+// practicing end  */
 
 //FUNCTION TO GET MATCHING PRODUCT
-
 export function getMatchingProducts(productId) {
   //FIND MATCHING PRODUCT
   const matchingProduct = products.find((product) => product.id === productId);

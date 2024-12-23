@@ -64,9 +64,7 @@ export function renderCartItems() {
             <div class="product-name">
               ${matchingProduct.name}
             </div>
-            <div class="product-price">$${formatCurrency(
-              matchingProduct.priceCents
-            )}</div>
+            <div class="product-price">${matchingProduct.getPrice()}</div>
             <div class="jasmine-product-quantity-${
               matchingProduct.id
             } product-quantity">
