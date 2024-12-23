@@ -4,17 +4,18 @@ class Cart {
   //1st
   // cartItems = undefined;
   cartItems;
+  #localStorageStoreVariable;
 
   constructor(localStorageStoreVariable) {
-    this.localStorageStoreVariable = localStorageStoreVariable;
-    this.loadFromStorage();
+    this.#localStorageStoreVariable = localStorageStoreVariable;
+    this.#loadFromStorage();
   }
 
   //2nd
   // FUNCTION TO LOAD FROM LOCAL STORAGE
-  loadFromStorage() {
+  #loadFromStorage() {
     this.cartItems = JSON.parse(
-      localStorage.getItem(this.localStorageStoreVariable)
+      localStorage.getItem(this.#localStorageStoreVariable)
     ) || [
       // FIRST ITEM
       {
@@ -69,7 +70,7 @@ class Cart {
   //FUNCTION TO SAVE CART ITEMS TO LOCAL STORAGE
   saveCartItemsToLocalStorage() {
     localStorage.setItem(
-      this.localStorageStoreVariable,
+      this.#localStorageStoreVariable,
       JSON.stringify(this.cartItems)
     );
   }
