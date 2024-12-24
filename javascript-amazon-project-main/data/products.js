@@ -46,8 +46,54 @@ class Clothing extends Product {
   }
 }
 
+export let products = [];
+
+//FUNCTN TO LOADPRODUCTS
+export function loadProducts(fun) {
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener("load", () => {
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if (productDetails.type === "clothing") {
+        return new Clothing(productDetails);
+      } else {
+        return new Product(productDetails);
+      }
+    });
+    console.log("loaded products");
+    if (typeof fun === "function") {
+      fun();
+    }
+  });
+  xhr.open("GET", "https://supersimplebackend.dev/products");
+  xhr.send();
+}
+
+//try using FETCH // caused an error.
+/* export async function loadProducts(callback) {
+  try {
+    const res = await fetch("https://supersimplebackend.dev/products");
+    const productData = await res.json();
+    // Mapping products synchronously
+    const products = productData.map((productDetails) => {
+      if (productDetails.type === "clothing") {
+        return new Clothing(productDetails);
+      } else {
+        return new Product(productDetails);
+      }
+    });
+    // console.log(products);
+    if (typeof callback === "function") {
+      callback(products); // Pass products to the callback
+    } else {
+      return;
+    }
+  } catch (error) {
+    console.log("Error: ", error);
+  }
+}
+ */
 //convert regular objects of product/productDetail into class
-export const products = [
+/* export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -524,7 +570,7 @@ export const products = [
   } else {
     return new Product(productDetails);
   }
-});
+}); */
 
 /* // practicing start
 class Product {
