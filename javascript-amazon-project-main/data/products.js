@@ -59,7 +59,7 @@ export function loadProducts(fun) {
         return new Product(productDetails);
       }
     });
-    console.log("loaded products");
+    // console.log("loaded products");
     if (typeof fun === "function") {
       fun();
     }
