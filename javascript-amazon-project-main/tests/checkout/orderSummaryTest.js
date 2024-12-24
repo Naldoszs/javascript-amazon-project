@@ -1,6 +1,8 @@
 import { renderCartItems } from "../../scripts/checkout/orderSummary.js";
 import { loadFromStorage, cart } from "../../data/cart.js";
 
+import { loadProducts } from "../../data/products.js";
+
 // RUN AN INTEGRATED TEST
 // checking for two things
 /* 1. how the page looks &
@@ -9,6 +11,14 @@ import { loadFromStorage, cart } from "../../data/cart.js";
 describe("TEST SUITE: renderSummary Function", () => {
   // Declare reusable variables
   let productId1, productId2, orderSummaryContainerEl;
+
+  //load the products for all tests
+  //done help waits bfr going for the next codes
+  beforeAll((done) => {
+    loadProducts(() => {
+      done();
+    });
+  });
 
   //CREATE HOOK
   beforeEach(() => {
