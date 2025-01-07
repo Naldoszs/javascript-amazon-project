@@ -59,6 +59,7 @@ export function loadProducts(fun) {
         return new Product(productDetails);
       }
     });
+    // console.log(products);
     // console.log("loaded products");
     if (typeof fun === "function") {
       fun();
@@ -68,29 +69,84 @@ export function loadProducts(fun) {
   xhr.send();
 }
 
-//try using FETCH // caused an error.
-/* export async function loadProducts(callback) {
-  try {
-    const res = await fetch("https://supersimplebackend.dev/products");
-    const productData = await res.json();
-    // Mapping products synchronously
-    const products = productData.map((productDetails) => {
-      if (productDetails.type === "clothing") {
-        return new Clothing(productDetails);
-      } else {
-        return new Product(productDetails);
-      }
+//main
+export function loadProductsFetch() {
+  const promise = fetch("https://supersimplebackend.dev/products")
+    .then((res) => {
+      // console.log(res.json());
+      return res.json();
+    })
+    .then((data) => {
+      return data.map((productDetails) => {
+        if (productDetails.type === "clothing") {
+          return new Clothing(productDetails);
+        } else {
+          return new Product(productDetails);
+        }
+      });
     });
-    // console.log(products);
-    if (typeof callback === "function") {
-      callback(products); // Pass products to the callback
-    } else {
-      return;
-    }
-  } catch (error) {
-    console.log("Error: ", error);
-  }
+  return promise;
 }
+//remember loadProductsFetch ftn returns a promise // returns array of products
+// loadProductsFetch().then((productData) => console.log(productData)); // an example
+
+// example start
+
+//try using FETCH // caused an error.
+/*  export async function loadProductsFetch() {
+  const res = (await fetch("https://supersimplebackend.dev/products")).json();
+  return res; // Explicitly return the parsed JSON
+}
+
+loadProductsFetch().then((data) => {
+  console.log(data); // This will now log the fetched data
+});  */
+
+/* export function loadProductsFetch() {
+  return fetch("https://supersimplebackend.dev/products").then((res) => {
+    return res
+      .json()
+      .then((data) => {
+        return data.map((productDetails) => {
+          if (productDetails.type === "clothing") {
+            return new Clothing(productDetails);
+          } else {
+            return new Product(productDetails);
+          }
+        });
+      })
+      .then((data) => {
+        // console.log(data);
+        return data;
+      });
+  });
+}
+
+console.log(loadProductsFetch()); */
+
+/* export function loadProductsFetch() {
+  return fetch("https://supersimplebackend.dev/products")
+    .then((res) => res.json()) // Parse the JSON response
+    .then((data) => {
+      console.log(data); // Log the raw data
+      return data.map((productDetails) => {
+        if (productDetails.type === "clothing") {
+          return new Clothing(productDetails); // Create a Clothing instance
+        } else {
+          return new Product(productDetails); // Create a Product instance
+        }
+      });
+    });
+}
+
+
+// example end 
+
+
+// Use the function
+loadProductsFetch().then((products) => {
+  console.log(products); // Log the array of Product/Clothing instances
+});
  */
 //convert regular objects of product/productDetail into class
 /* export const products = [

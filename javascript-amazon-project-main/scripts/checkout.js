@@ -2,7 +2,7 @@ import { renderCartItems } from "./checkout/orderSummary.js";
 
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 
-import { loadProducts } from "../data/products.js";
+import { loadProducts, loadProductsFetch } from "../data/products.js";
 
 // import "../data/cart-oop.js";
 
@@ -15,14 +15,44 @@ import { loadProducts } from "../data/products.js";
 // import { loadCarts } from "../data/cart.js";
 
 // my main code
-new Promise((resolve, reject) => {
+/* new Promise((resolve, reject) => {
   loadProducts(() => {
     resolve(); // means once resolved or done move to then.
   });
 }).then(() => {
   renderCartItems();
   renderPaymentSummary();
-});
+}); */
+//main code 2
+loadProductsFetch()
+  .then((data) => {
+    return data;
+  })
+  .then(() => {
+    renderCartItems();
+    renderPaymentSummary();
+  });
+
+/* new Promise((resolve, reject) => {
+  loadProductsFetch()
+    .then((products) => {
+      resolve(products); // Resolve with the loaded products
+    })
+    .catch((error) => {
+      reject(error); // Reject in case of an error
+    });
+})
+  .then((products) => {
+    // Use the products if needed
+    console.log("Loaded products:", products);
+
+    // Render cart items and payment summary
+    renderCartItems(products);
+    renderPaymentSummary(products);
+  })
+  .catch((error) => {
+    console.error("Error loading products or rendering:", error);
+  }); */
 
 //example code
 /* new Promise((resolve, reject) => {
